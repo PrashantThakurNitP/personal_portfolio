@@ -1,0 +1,26 @@
+
+{% extends 'portfolia/base.html' %}
+
+{% block content%}
+				<h1 class="alert alert-success">PRASHANT'S BLOG</h1>
+				<br>
+				<h2>Prashant has written {{projects_blog.count}} blog{{projects_blog.count|pluralize}}</h2>
+				<br>
+				{% for project_blog in projects_blog %}
+
+				<div class="jumbotron text-center">
+						<a href="{% url 'blog:detail' project_blog.id %}"><h2>{{ project_blog.title }}</h2></a> 
+						<!-- we have done 'blog:detail' because if we have not done this and if there were multiple
+							detail page in different app then it would by default take to first app -->
+							<!-- by doing this we have made our title as link to detail page and to particular id -->
+						
+						<h5>{{project_blog.date|date:"M d Y"}}</h5><!--  after |date: inside "" we can specify order in which dat month and year appea-->
+						
+						<p>{{ project_blog.description|striptags|truncatechars:100 }} </p>
+						<br>
+
+						
+				</div>	
+				{% endfor %}
+
+{% endblock %}
